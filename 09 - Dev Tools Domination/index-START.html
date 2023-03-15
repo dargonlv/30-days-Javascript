@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+  <p onClick="makeGreen()" class="ss">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log("helo");
+    
+
+    // Interpolated
+    console.log("merhaba %s",'dünya');
+
+    // Styled
+    console.log(
+      "%c dsadsad dsad dd", "font-size:10px; background:yellow; color:black;"
+    );
+
+    // warning!
+    console.warn("sorunvar");
+
+    // Error :|
+    console.error("hata");
+    // Info
+    console.info("bilgilendirme sdasd ads asd");
+    // Testing
+    const pa = document.querySelector("p");
+    
+
+    console.assert(pa.classList.contains("ss"),"paragraflar böyole bir clasa sahip değil");
+    console.assert(pa.classList.contains("yok"),"paragraflar böyole bir clasa sahip değil");
+    
+    // clearing
+    console.clear();
+    
+    // Viewing DOM Elements
+    console.log(pa);
+    console.dir(pa);
+    
+    console.clear();
+    // Grouping together
+    dogs.forEach(dog =>{
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`${dog.name} = ${dog.age}`);
+      console.log(`${dog.name} = ${dog.age}`);
+      console.log(`${dog.name} = ${dog.age}`);
+      console.groupEnd(`${dog.name}`);
+    });
+
+    // counting
+    console.count("sayi");
+    console.count("sayi");
+    console.count("yeni");
+    console.count("yeni");
+    console.count("yeni");
+    console.count("sayi");
+    console.count("sayi");
+    console.count("sayi");
+    console.count("yeni");
+    
+    // timing
+    console.time("veri alınıyor");//time hep altta kalıyor
+    fetch("https://api.github.com/users/wesbos").then(data => data.json()).then(data => {
+      console.timeEnd("veri alınıyor");
+      console.log(data);
+    })
+
+    console.table(dogs);
+
+  </script>
+</body>
+</html>

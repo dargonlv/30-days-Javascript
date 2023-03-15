@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+<script>
+  const deger = [];
+  const kelime ='asd';
+  window.addEventListener('keyup', (e) =>{
+    deger.push(e.key);
+    console.log(deger);
+    deger.splice(-kelime.length - 1, deger.length - kelime.length);//diziden kelime kesme işlemi
+    // console.log(deger.join(''));//içine girdik ve elmanları virgülsüz bir kelime gibi yazdırdık örnek: asd
+    if (deger.join('').includes(kelime)) {
+      console.log("oldu");
+      cornify_add();
+    }
+  })
+</script>
+</body>
+</html>

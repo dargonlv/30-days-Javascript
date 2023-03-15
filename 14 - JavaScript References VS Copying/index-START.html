@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+  <script>
+    // start with strings, numbers and booleans
+    // let age = 100;
+    // let age2 = age;
+    // console.log(age, age2);
+    // age = 200;
+    // console.log(age, age2);
+
+
+    // let name = 'meral';
+    // let name2= name;
+    // console.log(name, name2);
+    // name = 'fatih';
+    // console.log(name, name2);
+
+    // Let's say we have an array
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    // and we want to make a copy of it.
+    const team = players;
+
+    console.log(team);
+
+
+    // You might think we can just do something like this:
+    // team[3]='fatih';
+    console.log('team',team);
+    console.log('players',players);
+    //atama işlemini team dizisine yapttık ama players diziside etkilendi
+
+    // however what happens when we update that array?
+
+    // now here is the problem!
+
+    // oh no - we have edited the original array too!
+
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+    // So, how do we fix this? We take a copy instead!
+    const team2= players.slice();
+
+    // one way
+
+    // or create a new array and concat the old one in
+    const team3= [].concat(players);
+
+    // or use the new ES6 Spread
+    const team4 = [...players];
+    team4[3]='sdad dsa';
+    console.log(team4);
+
+    const team5 = Array.from(players);//bu şekilde yaparsak arttık team 5 adında bir dizi olur 
+
+    // now when we update it, the original one isn't changed
+
+    // The same thing goes for objects, let's say we have a person object
+
+    // with Objects
+    const person = {
+      name: 'Wes Bos',
+      age: 80
+    };
+    
+
+    // and think we make a copy:
+    // const captain = person;
+    // captain.number = 99;//number adında bi değer oluştu içinde 99 u tutuyor
+    // //captaindaki bu değişiklik personuda etkiledi
+
+
+    // how do we take a copy instead?
+    const yeni = Object.assign({}, person , {number: 99, age:12});//bu sefer iki bağımsız obje olarak işlem yapttık
+    console.log(yeni);
+
+    // We will hopefully soon see the object ...spread
+    // const yeni3 = {...person};
+
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    const araba = {
+      marka: 'opel',
+      yil: 2000,
+      parca:{
+        lastik: 4,
+        kaput:1,
+        renk: 'kırmızı',
+      }
+    }
+
+    console.clear();
+    console.log(araba);
+
+    const dec = Object.assign({}, araba);
+
+    const dec2= JSON.parse(JSON.stringify(araba));
+    //JSON.stringify(araba) string haline cevirdi javaya uygun olarak
+    // JSON.parse(JSON.stringify(araba)) yeniden bir obje olarak tanımladık 
+    
+
+
+  </script>
+
+</body>
+</html>

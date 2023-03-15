@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const cities = [];
+
+const veri = fetch(endpoint).then(a => a.json()).then(b=> cities.push(b));//...b 3 nokta ekleyerek bi üst kadameye cıkardık
+//Web tarafında veya  bir dosya getirecekken fechi kullanıyoruz
+
+function kelimeAra(kelime, cities){
+  return cities.filter(fi => {
+
+    const regex = new RegExp(kelime,'gi'); 
+    return fi.city.match(regex) || fi.state.match(regex);//aradığımız kelimediki değerleri gi kullanarak orjinel ahaliyle çekttik
+
+  });
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function ekrandAra(){
+
+const deger= kelimeAra(this.value,cities);
+const html = deger.map(yuzey => {
+    const regex = new RegExp(this.value,'gi');
+    
+    const cityName= yuzey.city.replace(regex, `<span class="hl">${this.value}</span>`);//regexdeki yerleri değiştirdik
+    const stateName= yuzey.state.replace(regex,`<span class="hl">${this.value}</span>`);
+    return `
+      <li>
+        <span class="name">${cityName}, ${stateName} </span>
+        <span class="population">${numberWithCommas(yuzey.population)}</span>
+      </li>
+    `;
+    
+}).join(' ');
+
+suggestions.innerHTML=html;
+// console.log(deger);
+}
+
+const serachInput= document.querySelector('.search');
+const suggestions= document.querySelector('.suggestions');
+
+serachInput.addEventListener("change",ekrandAra);
+serachInput.addEventListener("keyup",ekrandAra);
+
+
+</script>
+</body>
+</html>
